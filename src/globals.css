@@ -1,0 +1,1155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import './components/ui/AnimatedPurchaseButton.css'; /* NEW: Import AnimatedPurchaseButton styles */
+/* @import './components/GooeyNav.css'; */ /* REMOVED: GooeyNav styles */
+/* @import './components/Plasma.css'; */ /* REMOVED: Plasma styles */
+@import './components/TrueFocus.css'; /* NEW: Import TrueFocus styles */
+@import './components/ScrollFloat.css'; /* NEW: Import ScrollFloat styles */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Varela Round font import */
+@font-face {
+  font-family: 'Varela Round';
+  src: url('./assets/fonts/VarelaRound-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 220 14.3% 95.9%; /* Tailwind's gray-50 equivalent */
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 218 30% 14%; /* Dark Slate - matches #1a232f */
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --ferrari-red-hex: #FF2800; /* Custom Ferrari Red color */
+    --ferrari: #c81a1a; /* New variable from provided HTML */
+    --ferrari-600: #b21717; /* New variable from provided HTML */
+
+    /* GooeyNav colors */
+    --color-1: #FF2800; /* Ferrari Red */
+    --color-2: #00B6BB; /* Light Blue */
+    --color-3: #973BED; /* Purple */
+    --color-4: #FFC800; /* Yellow */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 218 30% 14%; /* Dark Slate - matches #1a232f */
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Varela Round', sans-serif; /* Apply Varela Round font */
+    /* position: relative; */ /* WebGL uchun edi, olib tashlandi */
+  }
+}
+
+/* WebGL ustida bo'lishi kerak bo'lgan kontent uchun stil */
+.content-layer {
+    position: relative;
+    z-index: 10;
+}
+
+/* New styles from provided HTML for dashboard */
+.ui-root { position: relative; z-index: 10; min-height: 100vh; }
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.76));
+  backdrop-filter: blur(8px) saturate(1.05);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 14px;
+  border: 1px solid rgba(200,20,20,0.06);
+  box-shadow: 0 10px 30px rgba(17,24,39,0.06);
+  transition: transform .26s cubic-bezier(.2,.9,.2,1), box-shadow .26s;
+}
+.glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(184,24,24,0.09); }
+
+.oval { border-radius: 80px; }
+
+.pill {
+  background: linear-gradient(90deg,var(--ferrari),var(--ferrari-600));
+  color:white;
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:13px;
+  box-shadow: 0 8px 22px rgba(200,20,20,0.12);
+}
+
+/* Fallback message when WebGL unsupported */
+.no-webgl {
+  /* WebGL olib tashlanganligi sababli bu stil endi kerak emas */
+  display: none !important; 
+}
+
+/* small helper */
+.muted { color:#6b7280; }
+
+
+@layer components {
+  .animated-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 36px;
+    border: 4px solid;
+    border-color: transparent;
+    font-size: 16px;
+    background-color: inherit;
+    border-radius: 100px;
+    font-weight: 600;
+    color: var(--ferrari-red-hex);
+    box-shadow: 0 0 0 2px var(--ferrari-red-hex);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button svg {
+    position: absolute;
+    width: 24px;
+    fill: var(--ferrari-red-hex);
+    z-index: 9;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button .arr-1 {
+    right: 16px;
+  }
+
+  .animated-button .arr-2 {
+    left: -25%;
+  }
+
+  .animated-button .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--ferrari-red-hex);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button .text {
+    position: relative;
+    z-index: 1;
+    transform: translateX(-12px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animated-button:hover {
+    box-shadow: 0 0 0 12px transparent;
+    color: white; /* Changed to white for better contrast with red circle */
+    border-radius: 12px;
+  }
+
+  .animated-button:hover .arr-1 {
+    right: -25%;
+  }
+
+  .animated-button:hover .arr-2 {
+    left: 16px;
+  }
+
+  .animated-button:hover .text {
+    transform: translateX(12px);
+  }
+
+  .animated-button:hover svg {
+    fill: white; /* Changed to white for better contrast with red circle */
+  }
+
+  .animated-button:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 4px var(--ferrari-red-hex);
+  }
+
+  .animated-button:hover .circle {
+    width: 220px;
+    height: 220px;
+    opacity: 1;
+  }
+
+  /* New styles for animated navigation links */
+  .nav-link-animated {
+    margin: 0;
+    height: auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    --border-right: 6px;
+    --text-stroke-color: #333; /* Dark gray for better visibility */
+    --animation-color: var(--ferrari-red-hex);
+    --fs-size: 1.1em; /* Adjusted for header */
+    letter-spacing: 1px; /* Slightly reduced letter spacing */
+    text-decoration: none;
+    font-size: var(--fs-size);
+    font-family: "Varela Round", sans-serif; /* Use project's font */
+    position: relative;
+    text-transform: uppercase;
+    color: #333; /* Solid dark gray for base text */
+    -webkit-text-stroke: 0px transparent; /* Remove base stroke */
+    transition: all 0.5s ease; /* Smooth transition for overall button */
+  }
+
+  .nav-link-animated .hover-text {
+    position: absolute;
+    box-sizing: border-box;
+    content: attr(data-text);
+    color: var(--animation-color);
+    width: 0%;
+    inset: 0;
+    border-right: var(--border-right) solid var(--animation-color);
+    overflow: hidden;
+    transition: 0.5s;
+    -webkit-text-stroke: 1px var(--animation-color); /* Keep stroke for hover effect */
+  }
+
+  .nav-link-animated:hover .hover-text {
+    width: 100%;
+    filter: drop-shadow(0 0 10px var(--animation-color)); /* Reduced shadow for subtlety */
+  }
+
+  /* Styles for the animated logout button */
+  .Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--ferrari-red-hex); /* Using Ferrari Red */
+  }
+
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sign svg {
+    width: 17px;
+  }
+
+  .sign svg path {
+    fill: white;
+  }
+  /* text */
+  .text-logout { /* Renamed to avoid conflict with .text in animated-button */
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+    padding-left: 20px; /* Added padding to shift icon */
+  }
+
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text-logout {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
+
+  /* Custom nav button effect */
+  .nav-button-effect {
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 7px;
+    border: 1px solid var(--ferrari-red-hex); /* Use Ferrari Red */
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    background: transparent;
+    color: #fff; /* Text color for dark sidebar */
+    overflow: hidden;
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    display: flex; /* Ensure flex for icon and text */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%; /* Take full width of parent */
+  }
+
+  .nav-button-effect:hover {
+    background: var(--ferrari-red-hex); /* Use Ferrari Red */
+    box-shadow: 0 0 30px 5px rgba(255, 40, 0, 0.815); /* Ferrari Red shadow */
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+  }
+
+  .nav-button-effect:hover::before {
+    -webkit-animation: sh02 0.5s 0s linear;
+    -moz-animation: sh02 0.5s 0s linear;
+    animation: sh02 0.5s 0s linear;
+  }
+
+  .nav-button-effect::before {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 86%;
+    position: absolute;
+    top: 7%;
+    left: 0%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 50px 30px #fff;
+    -webkit-transform: skewX(-20deg);
+    -moz-transform: skewX(-20deg);
+    -ms-transform: skewX(-20deg);
+    -o-transform: skewX(-20deg);
+    transform: skewX(-20deg);
+  }
+
+  @keyframes sh02 {
+    from {
+      opacity: 0;
+      left: 0%;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      left: 100%;
+    }
+  }
+
+  .nav-button-effect:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+  }
+
+  /* Active state for nav button effect */
+  .nav-button-effect.active {
+    background: var(--ferrari-red-hex);
+    box-shadow: 0 0 30px 5px rgba(255, 40, 0, 0.815);
+    color: white;
+  }
+
+  /* From Uiverse.io by kyle1dev */
+  .modern-form {
+    --primary: var(--ferrari-red-hex); /* Changed from #3b82f6 to Ferrari Red */
+    --primary-dark: #cc2200; /* Darker shade of Ferrari Red */
+    --primary-light: rgba(255, 40, 0, 0.1); /* Lighter shade of Ferrari Red with opacity */
+    --success: #10b981;
+    --text-main: #1e293b;
+    --text-secondary: #64748b;
+    --bg-input: #f8fafc;
+
+    position: relative;
+    width: 300px;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.05),
+      inset 0 0 0 1px rgba(148, 163, 184, 0.1);
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .form-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0 0 24px;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+
+  .input-group {
+    margin-bottom: 16px;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 36px;
+    font-size: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: var(--bg-input);
+    color: var(--text-main);
+    transition: all 0.2s ease;
+  }
+
+  .form-input::placeholder {
+    color: var(--text-secondary);
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+    pointer-events: none;
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .eye-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .submit-button {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-top: 8px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .button-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  .form-footer {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .login-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .login-link span {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  /* Hover & Focus States */
+  .form-input:hover {
+    border-color: #cbd5e1;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px var(--primary-light);
+  }
+
+  .password-toggle:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+  }
+
+  .submit-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 12px rgba(59, 130, 246, 0.25),
+      0 2px 4px rgba(59, 130, 246, 0.15);
+  }
+
+  .submit-button:hover .button-glow {
+    transform: translateX(100%);
+  }
+
+  .login-link:hover {
+    color: var(--text-main);
+  }
+
+  .login-link:hover span {
+    color: var(--primary-dark);
+  }
+
+  /* Active States */
+  .submit-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .password-toggle:active {
+    transform: scale(0.9);
+  }
+
+  /* Validation States */
+  .form-input:not(:placeholder-shown):valid {
+    border-color: var(--success);
+  }
+
+  .form-input:not(:placeholder-shown):valid ~ .input-icon {
+    color: var(--success);
+  }
+
+  /* Animation */
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-4px);
+    }
+    75% {
+      transform: translateX(4px);
+    }
+  }
+
+  .form-input:not(:placeholder-shown):invalid {
+    border-color: #ef4444;
+    animation: shake 0.2s ease-in-out;
+  }
+
+  .form-input:not(:placeholder-shown):invalid ~ .input-icon {
+    color: #ef4444;
+  }
+
+  /* New Loading Spinner Styles */
+  .blob-loader {
+    width: 112px;
+    height: 112px;
+    display: grid;
+    background: #fff;
+    filter: blur(5.6px) contrast(10);
+    padding: 11.2px;
+    mix-blend-mode: darken;
+  }
+
+  .blob-loader:before,
+  .blob-loader:after {
+    content: "";
+    grid-area: 1/1;
+    width: 44.8px;
+    height: 44.8px;
+    background: var(--ferrari-red-hex); /* Changed to Ferrari Red */
+    animation: blob-rhf26m 2s infinite;
+  }
+
+  .blob-loader:after {
+    animation-delay: -1s;
+  }
+
+  @keyframes blob-rhf26m {
+    0% {
+      transform: translate(0, 0);
+    }
+
+    25% {
+      transform: translate(100%, 0);
+    }
+
+    50% {
+      transform: translate(100%, 100%);
+    }
+
+    75% {
+      transform: translate(0, 100%);
+    }
+
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  /* CEFR LC text animation */
+  .cefr-lc-text {
+    font-size: 2.5rem; /* Adjust size as needed */
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(
+      90deg,
+      #FF2800, /* Ferrari Red */
+      #00B6BB, /* Light Blue */
+      #973BED, /* Purple */
+      #FFC800, /* Yellow */
+      #00DA72, /* Green */
+      #FF2800 /* Ferrari Red */
+    );
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 8s ease infinite;
+  }
+
+  @keyframes gradientText {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Notification Card Styles */
+  .notification-card-content {
+    position: relative;
+    width: 280px; /* Adjusted width for better dialog fit */
+    min-height: 200px; /* Adjusted height */
+    background: var(--notification-background); /* Dynamic background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px; /* Adjusted font size */
+    font-weight: bold;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .notification-card-content::before,
+  .notification-card-content::after {
+    position: absolute;
+    content: "";
+    width: 20%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: var(--notification-accent); /* Dynamic accent color */
+    transition: all 0.5s;
+    z-index: 0;
+  }
+
+  .notification-card-content::before {
+    top: 0;
+    right: 0;
+    border-radius: 0 15px 0 100%;
+  }
+
+  .notification-card-content::after {
+    bottom: 0;
+    left: 0;
+    border-radius: 0 100%  0 15px;
+  }
+
+  .notification-card-content.is-open::before,
+  .notification-card-content.is-open::after {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    transition: all 0.5s;
+  }
+
+  /* Specific colors for success/error */
+  .notification-card-content.success {
+    --notification-background: #22c55e; /* Tailwind green-500 */
+    --notification-accent: #16a34a; /* Tailwind green-600 */
+  }
+
+  .notification-card-content.error {
+    --notification-background: #ef4444; /* Tailwind red-500 */
+    --notification-accent: #dc2626; /* Tailwind red-600 */
+  }
+
+  .notification-card-message {
+    position: relative;
+    z-index: 1;
+    font-size: 1.2rem; /* Adjusted font size */
+    line-height: 1.4;
+    margin-bottom: 20px;
+    padding: 0 10px; /* Add horizontal padding */
+  }
+
+  .notification-card-button {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .notification-card-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Loading Indicator styles */
+  .loading-indicator-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .loading-message-item {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .loading-spinner-small {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    70% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.5s ease-out forwards;
+  }
+
+  /* From Uiverse.io by Bodyhc */
+  .search {
+    display: inline-block;
+    position: relative;
+  }
+
+  .search input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .search button[type="submit"] {
+    background-color: var(--ferrari-red-hex); /* Changed to Ferrari Red */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .9s ease;
+  }
+
+  .search button[type="submit"]:hover {
+    transform: scale(1.1);
+    color: rgb(255, 255, 255);
+    background-color: var(--ferrari); /* Darker Ferrari Red on hover */
+  }
+
+  /* Custom Button Base Styles */
+  .custom-button-base {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20); /* Default dark background */
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: .3s;
+    overflow: hidden;
+    position: relative;
+    margin-right: 8px; /* Add some margin for spacing between buttons */
+  }
+
+  .custom-button-svg-icon {
+    width: 12px;
+    transition-duration: .3s;
+  }
+
+  .custom-button-svg-icon path {
+    fill: white;
+  }
+
+  .custom-button-base:hover {
+    width: 140px;
+    border-radius: 50px;
+    transition-duration: .3s;
+    align-items: center;
+  }
+
+  .custom-button-base:hover .custom-button-svg-icon {
+    width: 50px;
+    transition-duration: .3s;
+    transform: translateY(60%);
+  }
+
+  .custom-button-base::before {
+    position: absolute;
+    top: -20px;
+    color: white;
+    transition-duration: .3s;
+    font-size: 2px;
+  }
+
+  .custom-button-base:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(30px);
+    transition-duration: .3s;
+  }
+
+  /* Specific styles for Delete Button */
+  .custom-delete-button {
+    @apply custom-button-base; /* Inherit base styles */
+  }
+
+  .custom-delete-button:hover {
+    background-color: rgb(255, 69, 69); /* Red for delete */
+  }
+
+  .custom-delete-button::before {
+    content: "Delete";
+  }
+
+  /* Specific styles for Edit Button */
+  .custom-edit-button {
+    @apply custom-button-base; /* Inherit base styles */
+  }
+
+  .custom-edit-button:hover {
+    background-color: rgb(0, 123, 255); /* Blue for edit */
+  }
+
+  .custom-edit-button::before {
+    content: "Edit";
+  }
+
+  /* From Uiverse.io by LeonKohli */ 
+  .radio {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: row-reverse;
+  }
+
+  .radio > input {
+    position: absolute;
+    appearance: none;
+  }
+
+  .radio > label {
+    cursor: pointer;
+    font-size: 30px;
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .radio > label > svg {
+    fill: #666;
+    transition: fill 0.3s ease;
+  }
+
+  .radio > label::before,
+  .radio > label::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff9e0b;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
+    animation: particle-explosion 1s ease-out;
+  }
+
+  .radio > label::before {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+  }
+
+  .radio > label::after {
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+  }
+
+  .radio > label:hover::before,
+  .radio > label:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.5);
+  }
+
+  .radio > label:hover {
+    transform: scale(1.2);
+    animation: pulse 0.6s infinite alternate;
+  }
+
+  .radio > label:hover > svg,
+  .radio > label:hover ~ label > svg {
+    fill: #ff9e0b;
+    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    animation: shimmer 1s ease infinite alternate;
+  }
+
+  .radio > input:checked + label > svg,
+  .radio > input:checked + label ~ label > svg {
+    fill: #ff9e0b;
+    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    animation: pulse 0.8s infinite alternate;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes particle-explosion {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.5));
+    }
+    100% {
+      filter: drop-shadow(0 0 20px rgba(255, 158, 11, 1));
+    }
+  }
+
+  .radio > input:checked + label:hover > svg,
+  .radio > input:checked + label:hover ~ label > svg {
+    fill: #e58e09;
+  }
+
+  .radio > label:hover > svg,
+  .radio > label:hover ~ label > svg {
+    fill: #ff9e0b;
+  }
+
+  .radio input:checked ~ label svg {
+    fill: #ffa723;
+  }
+}
+
+/* Custom dark gradient card for DateTimeCard */
+.dark-gradient-card {
+  border-radius: 15px;
+  box-shadow: rgb(0,0,0,0.7) 5px 10px 50px ,rgb(0,0,0,0.7) -5px 0px 250px;
+  color: white;
+  background: linear-gradient(to right, rgb(20, 30, 48), rgb(36, 59, 85));
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.dark-gradient-card:hover {
+  box-shadow: rgb(0,0,0) 5px 10px 50px ,rgb(0,0,0) -5px 0px 250px;
+}

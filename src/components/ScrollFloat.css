@@ -1,0 +1,15 @@
+.scroll-float {
+  overflow: hidden;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  /* font-size is now controlled by Tailwind classes in parent components */
+  font-weight: 900; /* Default font weight, can be overridden */
+  text-align: center; /* Default text alignment, can be overridden */
+  line-height: 1.5;
+}
+
+.char {
+  display: inline-block;
+}

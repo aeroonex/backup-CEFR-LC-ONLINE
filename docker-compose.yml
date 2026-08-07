@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cefr
+      POSTGRES_PASSWORD: cefr
+      POSTGRES_DB: cefr
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5432:5432"
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  api:
+    build: ./server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    depends_on:
+      - postgres
+      - minio
+    ports:
+      - "4000:4000"
+
+volumes:
+  postgres_data:
+  minio_data:
